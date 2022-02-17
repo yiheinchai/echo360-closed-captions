@@ -1,6 +1,7 @@
 setTimeout(function () {
   // Your code here...
   //do what you need here
+  chrome.storage.sync.set({ fontSize: 22 });
   document.querySelector(".transcript").click();
   document.querySelector("#tooltips").innerHTML = `
     <div style="width: 100vw; bottom: 50px; display: flex; flex-flow: row; justify-content: center; z-index: 3; position: fixed"">
@@ -13,19 +14,22 @@ setTimeout(function () {
     `;
 
   function updateSubtitle() {
-    const width = document.querySelector(".screens").getBoundingClientRect().width;
-    document.querySelector("#tooltips").innerHTML = `
-                <div style="width: ${width}px; bottom: 50px; display: flex; flex-flow: row; justify-content: center; z-index: 3; position: fixed">
-                  <div
-                    class="inline-subs"
-                    draggable="true"
-                    style="background-color: rgba(8, 8, 8, 0.75); font-size: 22px; display: flex; flex-flow: row; justify-content: center; color: rgb(255, 255, 255); padding: 0.25rem 0.5rem 0.25rem 0.5rem; border-radius: 0.25rem"
-                  >
-                  </div>
-                </div>
-                `;
-    const text = document.querySelector(".highlight").textContent;
-    document.querySelector(".inline-subs").textContent = text;
+    chrome.storage.sync.get("fontSize", ({ fontSize }) => {
+      const width = document.querySelector(".screens").getBoundingClientRect().width;
+      document.querySelector("#tooltips").innerHTML = `
+                    <div style="width: ${width}px; bottom: 50px; display: flex; flex-flow: row; justify-content: center; z-index: 3; position: fixed">
+                      <div
+                        class="inline-subs"
+                        draggable="true"
+                        style="background-color: rgba(8, 8, 8, 0.75); font-size: ${fontSize}px; display: flex; flex-flow: row; justify-content: center; color: rgb(255, 255, 255); padding: 0.25rem 0.5rem 0.25rem 0.5rem; border-radius: 0.25rem"
+                      >
+                      </div>
+                    </div>
+                    `;
+      if (!document.querySelector(".highlight")?.textContent) return;
+      const text = document.querySelector(".highlight").textContent;
+      document.querySelector(".inline-subs").textContent = text;
+    });
   }
   try {
     const observer = new MutationObserver(updateSubtitle);
