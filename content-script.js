@@ -8,7 +8,7 @@ setTimeout(function () {
                   <div
                     class="inline-subs"
                     style="background-color: rgba(8, 8, 8, 0.75); font-size: 22px; display: flex; flex-flow: row; justify-content: center; color: rgb(255, 255, 255); padding: 0.25rem; border-radius: 0.25rem"
-                  >Welcome to Yi Hein's Inline Subs
+                  >Welcome to Echo360 Closed Captions by Yi Hein Builds
                   </div>
                 </div>
     `;
@@ -39,7 +39,28 @@ setTimeout(function () {
       subtree: true,
     });
     document.querySelector(".transcript-panel").style.display = "none";
+    document.querySelector(".institutionInfo").style.display = "none";
+    document.querySelector(".echo-logo").style.display = "none";
+    document.querySelector(".courseName").style.display = "none";
     document.querySelector(".sidebar").style.flex = "0 0";
+    document.querySelector(".class-date").innerHTML += `
+    <button class="more_options" style=" background-color: #000f19; color: #00aee4; font-weight:900; font: inherit; border: none;border-radius: 0.25rem; font-size: 13px; position: relative;">More Options</button>
+`;
+    document.querySelector(".Nav").style.display = "none";
+    document.querySelector(".more_options").addEventListener("mouseenter", (e) => {
+      document.querySelector(".Nav").style.display = "flex";
+      document.querySelector(".institutionInfo").style.display = "flex";
+      document.querySelector(".echo-logo").style.display = "flex";
+      document.querySelector(".courseName").style.display = "flex";
+      document.querySelector(".more_options").textContent = "Hide Options";
+    });
+    document.querySelector(".more_options").onclick = (e) => {
+      document.querySelector(".Nav").style.display = "none";
+      document.querySelector(".institutionInfo").style.display = "none";
+      document.querySelector(".echo-logo").style.display = "none";
+      document.querySelector(".courseName").style.display = "none";
+      document.querySelector(".more_options").textContent = "More Options";
+    };
 
     // Enable drag and drop
     function dragstart_handler(ev) {
