@@ -1,7 +1,7 @@
 {
   "name": "Echo360 Closed Captions",
   "description": "Add closed captions to Echo360 lectures!",
-  "version": "1.1",
+  "version": "1.2",
   "manifest_version": 3,
   "options_page": "options.html",
   "content_scripts": [

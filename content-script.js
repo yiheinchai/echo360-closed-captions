@@ -13,6 +13,16 @@ setTimeout(function () {
                 </div>
     `;
 
+  function turnOptionOff(option) {
+    document.querySelector(".Nav").style.display = `${option ? "none" : "flex"}`;
+    document.querySelector(".transcript-panel").style.display = `${option ? "none" : "flex"}`;
+    document.querySelector(".institutionInfo").style.display = `${option ? "none" : "flex"}`;
+    document.querySelector(".echo-logo").style.display = `${option ? "none" : "flex"}`;
+    document.querySelector(".courseName").style.display = `${option ? "none" : "flex"}`;
+    document.querySelector(".sidebar").style.flex = `${option ? "0 0" : "0 0 30vw"}`;
+    document.querySelector(".transcript-panel").style.width = `${option ? "0" : "30vw"}`;
+  }
+
   function updateSubtitle() {
     chrome.storage.sync.get("fontSize", ({ fontSize }) => {
       const width = document.querySelector(".screens").getBoundingClientRect().width;
@@ -38,28 +48,20 @@ setTimeout(function () {
       childList: true,
       subtree: true,
     });
-    document.querySelector(".transcript-panel").style.display = "none";
-    document.querySelector(".institutionInfo").style.display = "none";
-    document.querySelector(".echo-logo").style.display = "none";
-    document.querySelector(".courseName").style.display = "none";
+    turnOptionOff(true);
     document.querySelector(".sidebar").style.flex = "0 0";
+    document.querySelector(".close-btn").remove();
     document.querySelector(".class-date").innerHTML += `
     <button class="more_options" style=" background-color: #000f19; color: #00aee4; font-weight:900; font: inherit; border: none;border-radius: 0.25rem; font-size: 13px; position: relative;">More Options</button>
 `;
-    document.querySelector(".Nav").style.display = "none";
-    document.querySelector(".more_options").addEventListener("mouseenter", (e) => {
-      document.querySelector(".Nav").style.display = "flex";
-      document.querySelector(".institutionInfo").style.display = "flex";
-      document.querySelector(".echo-logo").style.display = "flex";
-      document.querySelector(".courseName").style.display = "flex";
-      document.querySelector(".more_options").textContent = "Hide Options";
-    });
     document.querySelector(".more_options").onclick = (e) => {
-      document.querySelector(".Nav").style.display = "none";
-      document.querySelector(".institutionInfo").style.display = "none";
-      document.querySelector(".echo-logo").style.display = "none";
-      document.querySelector(".courseName").style.display = "none";
-      document.querySelector(".more_options").textContent = "More Options";
+      if (document.querySelector(".more_options").textContent === "More Options") {
+        turnOptionOff(false);
+        document.querySelector(".more_options").textContent = "Hide Options";
+      } else {
+        turnOptionOff(true);
+        document.querySelector(".more_options").textContent = "More Options";
+      }
     };
 
     // Enable drag and drop
@@ -76,9 +78,10 @@ setTimeout(function () {
     const openTranscriptButton = document.querySelector(".actions");
     function showTranscript() {
       document.querySelector(".transcript-panel").style = "";
-      document.querySelector(".sidebar").style.flex = "0 0 400px";
+      document.querySelector(".sidebar").style.flex = "0 0 30vw";
+      document.querySelector(".transcript-panel").style.width = "30vw";
       openTranscriptButton.innerHTML = `
-      <button class="close_transcript" style="background-color: #00aee4; color: #000f19; font: inherit; border: none;border-radius: 0.25rem; font-size: 13px">Hide</button>
+      <button class="close_transcript" style="background-color: #00aee4; color: #000f19; font: inherit; border: none;border-radius: 0.25rem; font-size: 13px">Hide Transcripot</button>
       `;
       document.querySelector(".close_transcript").onclick = hideTranscript;
     }
@@ -86,13 +89,13 @@ setTimeout(function () {
       document.querySelector(".transcript-panel").style.display = "none";
       document.querySelector(".sidebar").style.flex = "0 0";
       openTranscriptButton.innerHTML = `
-        <button class="open_transcript" style="background-color: #00aee4; color: #000f19; font: inherit; border: none; border-radius: 0.25rem; font-size: 13px">Show</button>
+        <button class="open_transcript" style="background-color: #00aee4; color: #000f19; font: inherit; border: none; border-radius: 0.25rem; font-size: 13px">Show Transcript</button>
         `;
       document.querySelector(".open_transcript").onclick = showTranscript;
     }
 
     openTranscriptButton.innerHTML = `
-      <button class="open_transcript" style="background-color: #00aee4; color: #000f19; font: inherit; border: none; border-radius: 0.25rem; font-size: 13px">Show</button>
+      <button class="open_transcript" style="background-color: #00aee4; color: #000f19; font: inherit; border: none; border-radius: 0.25rem; font-size: 13px">Show Transcript</button>
       `;
     document.querySelector(".open_transcript").onclick = showTranscript;
   } catch (error) {
