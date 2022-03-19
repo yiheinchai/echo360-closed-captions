@@ -3,8 +3,11 @@ setTimeout(function () {
   //do what you need here
   chrome.storage.sync.set({ fontSize: 22 });
   document.querySelector(".transcript").click();
-  document.querySelector("#tooltips").innerHTML = `
-    <div style="width: 100vw; bottom: 50px; display: flex; flex-flow: row; justify-content: center; z-index: 3; position: fixed"">
+  const captionWrapper = document.createElement("div");
+  captionWrapper.classList.add("caption_wrapper");
+  document.querySelector(".info").insertAdjacentElement("beforeend", captionWrapper);
+  document.querySelector(".caption_wrapper").innerHTML = `
+    <div style="width: 100vw; bottom: 50px; display: flex; flex-flow: row; justify-content: center; background-color: rgba(255,0,0,0); z-index: 3; position: fixed"">
                   <div
                     class="inline-subs"
                     style="background-color: rgba(8, 8, 8, 0.75); font-size: 22px; display: flex; flex-flow: row; justify-content: center; color: rgb(255, 255, 255); padding: 0.25rem; border-radius: 0.25rem"
@@ -26,8 +29,8 @@ setTimeout(function () {
   function updateSubtitle() {
     chrome.storage.sync.get("fontSize", ({ fontSize }) => {
       const width = document.querySelector(".screens").getBoundingClientRect().width;
-      document.querySelector("#tooltips").innerHTML = `
-                    <div style="width: ${width}px; bottom: 50px; display: flex; flex-flow: row; justify-content: center; z-index: 3; position: fixed">
+      document.querySelector(".caption_wrapper").innerHTML = `
+                    <div style="width: ${width}px; bottom: 50px; display: flex; flex-flow: row; justify-content: center; background-color: rgba(255,0,0,0); z-index: 3; position: fixed">
                       <div
                         class="inline-subs"
                         draggable="true"
@@ -101,7 +104,7 @@ setTimeout(function () {
   } catch (error) {
     console.error(error);
     document.querySelector(
-      "#tooltips"
-    ).innerHTML = `<div class="inline-subs" style="width: 100vw; background-color: white; bottom: 50px; font-size: 22px; display: flex; flex-flow: row; justify-content: center; z-index: 3; position: fixed; color: red;"><p>ERROR: Refresh the page, open transcript panel, paste the code again<p></div>`;
+      ".caption_wrapper"
+    ).innerHTML = `<div class="inline-subs" style="width: 100vw; background-color: white; bottom: 50px; font-size: 22px; display: flex; flex-flow: row; justify-content: center; background-color: rgba(255,0,0,0); z-index: 3; position: fixed; color: red;"><p>ERROR: Refresh the page, open transcript panel, paste the code again<p></div>`;
   }
 }, 2000);
