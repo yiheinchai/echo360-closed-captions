@@ -1,9 +1,8 @@
 {
   "name": "Echo360 Closed Captions",
   "description": "Add closed captions to Echo360 lectures!",
-  "version": "1.2",
+  "version": "1.3",
   "manifest_version": 3,
-  "options_page": "options.html",
   "content_scripts": [
     {
       "matches": ["https://echo360.org.uk/lesson/*"],
@@ -16,7 +15,6 @@
   },
   "permissions": ["storage", "activeTab", "scripting"],
   "action": {
-    "default_popup": "popup.html",
     "default_icon": {
       "16": "/images/closed_caption16.png",
       "32": "/images/closed_caption32.png",
