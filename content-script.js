@@ -7,7 +7,7 @@ setTimeout(function () {
   captionWrapper.classList.add("caption_wrapper");
   document.querySelector(".info").insertAdjacentElement("beforeend", captionWrapper);
   document.querySelector(".caption_wrapper").innerHTML = `
-    <div style="width: 100vw; bottom: 50px; display: flex; flex-flow: row; justify-content: center; background-color: rgba(255,0,0,0); z-index: 3; position: fixed"">
+    <div style="width: 100vw; left: 0; bottom: 50px; display: flex; flex-flow: row; justify-content: center; background-color: rgba(255,0,0,0); z-index: 3; position: fixed"">
                   <div
                     class="inline-subs"
                     style="background-color: rgba(8, 8, 8, 0.75); font-size: 22px; display: flex; flex-flow: row; justify-content: center; color: rgb(255, 255, 255); padding: 0.25rem; border-radius: 0.25rem"
@@ -30,7 +30,7 @@ setTimeout(function () {
     chrome.storage.sync.get("fontSize", ({ fontSize }) => {
       const width = document.querySelector(".screens").getBoundingClientRect().width;
       document.querySelector(".caption_wrapper").innerHTML = `
-                    <div style="width: ${width}px; bottom: 50px; display: flex; flex-flow: row; justify-content: center; background-color: rgba(255,0,0,0); z-index: 3; position: fixed">
+                    <div style="width: ${width}px; left: 0; bottom: 50px; display: flex; flex-flow: row; justify-content: center; background-color: rgba(255,0,0,0); z-index: 3; position: fixed">
                       <div
                         class="inline-subs"
                         draggable="true"
@@ -52,6 +52,7 @@ setTimeout(function () {
       subtree: true,
     });
     turnOptionOff(true);
+    document.querySelector(".controlsBar").style.overflow = "hidden";
     document.querySelector(".sidebar").style.flex = "0 0";
     document.querySelector(".close-btn").remove();
     document.querySelector(".class-date").innerHTML += `
