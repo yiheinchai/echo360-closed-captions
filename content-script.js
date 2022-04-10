@@ -52,7 +52,7 @@ setTimeout(function () {
       subtree: true,
     });
     turnOptionOff(true);
-    document.querySelector(".controlsBar").style.overflow = "hidden";
+    document.querySelector(".controls").style.height = "64px";
     document.querySelector(".sidebar").style.flex = "0 0";
     document.querySelector(".close-btn").remove();
     document.querySelector(".class-date").innerHTML += `
