@@ -1,6 +1,4 @@
 setTimeout(function () {
-  // Your code here...
-  //do what you need here
   chrome.storage.sync.set({ fontSize: 22 });
   document.querySelector(".transcript").click();
   const captionWrapper = document.createElement("div");

@@ -1,15 +1,14 @@
 {
   "name": "Echo360 Closed Captions",
   "description": "Add closed captions to Echo360 lectures!",
-  "version": "1.5",
+  "version": "1.6",
   "manifest_version": 3,
   "content_scripts": [
     {
       "matches": [
-        "https://echo360.org.uk/lesson/*",
-        "https://echo360.org/lesson/*",
-        "https://echo360.org.au/lesson/*",
-        "https://echo360.org.ca/lesson/*"
+        "https://echo360.*.uk/lesson/*",
+        "https://echo360.*/lesson/*",
+        "https://echo360.*.*/lesson/*"
       ],
       "css": ["my-styles.css"],
       "js": ["content-script.js"]
